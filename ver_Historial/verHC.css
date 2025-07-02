@@ -1,0 +1,178 @@
+:root {
+  --primary: #00acdb;
+  --primary-dark: #0077c2;
+  --bg: #fdfdfd;
+  --text: #1e1e1e;
+  --light: rgba(255, 255, 255, 0.95);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg) url('../img/fondo.jpg') center/cover no-repeat fixed;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 3rem;
+}
+
+/* Header */
+header {
+  width: 100%;
+  height: 90px;
+  background: var(--light);
+  border-bottom: 1px solid #e3e3e3;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.medTracker {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+/* Contenedores */
+.contenedorPrincipal {
+  width: 90%;
+  max-width: 1200px;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Búsqueda por DNI */
+.dniBusqueda {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
+}
+
+.dniBusqueda h2 {
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.dniBusqueda label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.dniBusqueda input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: #e2e2e2;
+  margin-bottom: 1rem;
+}
+
+.dniBusqueda button {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dniBusqueda button:hover {
+  background-color: var(--primary-dark);
+}
+
+.mensajeEstado {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.mostrarMensajeError {
+  color: red;
+}
+
+/* Datos del paciente */
+.contenedorDatos {
+  display: flex;
+  justify-content: center;
+}
+
+#formularioPacienteCargado {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  padding: 2.5rem;
+  width: 100%;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#formularioPacienteCargado label {
+  text-align: right;
+  font-weight: 600;
+  align-self: center;
+}
+
+#formularioPacienteCargado input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: #e2e2e2;
+}
+
+/* Enlaces */
+.historiaGuardada {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.historiaGuardada a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--primary-dark);
+  background-color: #eef9fd;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.historiaGuardada a:hover {
+  background-color: #d4f0f8;
+}
+
+/* Evolutivos */
+.evolutivo {
+  background-color: #11c5dd;
+  border-left: 5px solid var(--primary);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fechaHora {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.texto {
+  font-size: 1re
+}

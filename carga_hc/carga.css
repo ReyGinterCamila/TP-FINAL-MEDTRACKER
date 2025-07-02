@@ -1,0 +1,325 @@
+:root {
+  --primary: #00acdb;
+  --primary-dark: #0077c2;
+  --bg: #fdfdfd;
+  --text: #1e1e1e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg) url('../img/fondo.jpg') center/cover no-repeat fixed;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+header {
+  width: 100%;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e3e3e3;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.medTracker {
+:root {
+  --primary: #00acdb;
+  --primary-dark: #0077c2;
+  --bg: #fdfdfd;
+  --text: #1e1e1e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg) url('../img/fondo.jpg') center/cover no-repeat fixed;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+header {
+  width: 100%;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e3e3e3;
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+}
+
+.medTracker {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+
+/* Titulares y subtítulos */
+h2 {
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+h5 {
+  color: #676767;
+  margin: 10px 0 5px;
+  font-weight: 600;
+}
+
+/* Formulario y campos */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: #e2e2e2;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Botones */
+button {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Estados de mensaje */
+.mostrarMensajeError {
+  color: red;
+}
+
+.mensajeError {
+  display: none;
+}
+
+/* Contenedor de carga de evolución */
+.contenedorEvolutivo {
+  background: #fff;
+  border-radius: 20px;
+  margin-top: 3rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Grid del formulario */
+#formularioPacienteCargado {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: 100%;
+  padding: 3rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#formularioPacienteCargado label {
+  text-align: right;
+  font-weight: 600;
+  align-self: center;
+}
+
+/* Enlaces y extras */
+.historiaGuardada {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.fechaCarga {
+  font-size: 0.9rem;
+  color: #676767;
+  margin-top: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  #formularioPacienteCargado {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  #formularioPacienteCargado {
+    grid-template-columns: 1fr;
+  }
+
+  .historiaGuardada {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+}
+
+/* Titulares y subtítulos */
+h2 {
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+h5 {
+  color: #676767;
+  margin: 10px 0 5px;
+  font-weight: 600;
+}
+
+/* Formulario y campos */
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 20px;
+  background-color: #e2e2e2;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+/* Botones */
+button {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  background-color: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Estados de mensaje */
+.mostrarMensajeError {
+  color: red;
+}
+
+.mensajeError {
+  display: none;
+}
+
+/* Contenedor de carga de evolución */
+.contenedorEvolutivo {
+  background: #fff;
+  border-radius: 20px;
+  margin-top: 3rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Grid del formulario */
+#formularioPacienteCargado {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: 100%;
+  padding: 3rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#formularioPacienteCargado label {
+  text-align: right;
+  font-weight: 600;
+  align-self: center;
+}
+
+/* Enlaces y extras */
+.historiaGuardada {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.fechaCarga {
+  font-size: 0.9rem;
+  color: #676767;
+  margin-top: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  #formularioPacienteCargado {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  #formularioPacienteCargado {
+    grid-template-columns: 1fr;
+  }
+
+  .historiaGuardada {
+    flex-direction: column;
+    align-items: center;
+  }
+}
