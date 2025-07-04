@@ -25,7 +25,7 @@
   <!-- Header -->
   <header>
     <button id="hamburger" class="hamburger"><i class="fa-solid fa-bars"></i></button>
-    <a href="#" class="logo">MedTracker</a>
+    <a href="home.html" class="logo">MedTracker</a>
 
 
     <div class="user-menu">
@@ -33,25 +33,22 @@
       <img src="usuario.png" />
 
       <div id="config-menu" class="config-menu">
-        <div id="infoUsuario" style="display: none; flex-direction: column; gap: 0.5rem;">
-  <label>Nombre: <input id="inputNombre" type="text"></label>
-  <label>Apellido: <input id="inputApellido" type="text"></label>
-  <label>Teléfono: <input id="inputTelefono" type="tel"></label>
-  <label>Email: <input id="inputEmail" type="email" disabled></label>
-  <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
-    <button id="btnGuardar">Guardar cambios</button>
-    <button id="btnEliminar" style="background-color: crimson; color: white;">Eliminar usuario</button>
-  </div>
-</div>
+        <a href="editarDatosPaciente.html" class="config-item">
+          <i class="fa-solid fa-user-pen"></i> Editar mis datos
+        </a>
+
+        <button id="btnEliminar" class="config-item" style="color:#fff;background-color:crimson;">
+          <i class="fa-solid fa-user-xmark"></i> Eliminar mi usuario
+        </button>
       </div>
     </div>
 
   </header>
 
-  <!-- Main Content -->
+  <!-- MAIN -->
   <main>
-
-    
+  <!-- LO QUE SE VE EN EL HOMEPACIENTE -->
+  <!-- Próximo Turno  -->
     <section class="card">
       <h3>Próximo turno</h3>
       <p>10 jul 2025 • 14:30 hs — Dra. Gómez (Dermatología)
@@ -59,18 +56,22 @@
       </p>
     </section>
 
+  <!-- Sacar Turno Rápido  -->
     <section class="card">
       <h3>Solicitar turno rápido</h3>
       <p>
         <select>
           <option>Especialidad...</option>
-          <option>Clínica</option>
+          <option>Clínica Médica</option>
+          <option>Pediatría</option>
           <option>Cardiología</option>
+          <option>Dermatología</option>
         </select>
-        <button class="btn">Buscar disponibilidad</button>
+        <button class="btn" id="btnBuscar">Buscar disponibilidad</button>
       </p>
     </section>
 
+  <!-- Recetas Disponibles  -->
     <section class="card">
       <h3>Recetas activas</h3>
       <table class="tabla-recetas">
@@ -84,7 +85,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>Ibuprofeno</td>
+            <td>Ibuprofeno 800</td>
             <td>400 mg</td>
             <td>5 jun 2025</td>
             <td><a href="#">Descargar</a></td>

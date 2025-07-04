@@ -19,34 +19,19 @@ body {
   display: block;
 }
 
-.config-menu {
-  position: absolute;
-  top: 70px;
-  right: 20px;
-  background: #fff;
-  border: 1px solid #ccc;
-  padding: .5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  display: none;
-  flex-direction: column;
-  gap: .5rem;
-  z-index: 999;
+.config-menu{
+  display:none;             /* se muestra vía JS */
+  flex-direction:column;
+  position:absolute; top:48px; right:0;
+  background:#fff; border:1px solid #ccc; border-radius:.3rem;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  z-index:1000; min-width:190px;
 }
-
-.config-menu button {
-  background: none;
-  border: none;
-  color: #0077c2;
-  font-weight: bold;
-  cursor: pointer;
-  text-align: left;
+.config-item{
+  padding:.75rem 1rem; font-size:.9rem;
+  text-decoration:none; color:#333; text-align:left; cursor:pointer;
 }
-
-.config-menu button:hover {
-  text-decoration: underline;
-}
-
+.config-item:hover{background:#f2f2f2;}
 
 /* Sidebar */
 .sidebar {
@@ -193,7 +178,6 @@ select {
   border-bottom: 1px solid #e3e3e3;
 }
 
-/* --- FOOTER --- */
 /* --- FOOTER --- */
 footer.footer {
   width: calc(100% - 220px);

@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ----- 5. Login exitoso: guardar rol, email y redirigir ----- */
 sessionStorage.setItem("userRole", user.rol);
 sessionStorage.setItem("userEmail", email);
-localStorage.setItem("usuarioActivo", email);
 
 if (user.rol === "medico") {
   window.location.href = "../homeEspecialista.html";

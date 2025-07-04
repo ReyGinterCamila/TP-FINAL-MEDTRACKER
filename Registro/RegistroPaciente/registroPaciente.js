@@ -58,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* --- LOGIN AUTOMÁTICO --- */
 sessionStorage.setItem("userRole", "paciente");
 sessionStorage.setItem("userEmail", email);
-localStorage.setItem("usuarioActivo", email);
 
 
     alert("¡Registro exitoso! Redirigiéndote a tu panel…");

@@ -1,83 +1,51 @@
 window.addEventListener("DOMContentLoaded", () => {
-  const configBtn = document.getElementById("btn-config")!;
-  const configMenu = document.getElementById("config-menu")!;
-  const infoUsuario = document.getElementById("infoUsuario")!;
+  const configBtn   = document.getElementById("btn-config") as HTMLElement;
+  const configMenu  = document.getElementById("config-menu")  as HTMLElement;
+  const btnEliminar = document.getElementById("btnEliminar")  as HTMLButtonElement;
 
-  const inputNombre = document.getElementById("inputNombre") as HTMLInputElement;
-  const inputApellido = document.getElementById("inputApellido") as HTMLInputElement;
-  const inputTelefono = document.getElementById("inputTelefono") as HTMLInputElement;
-  const inputEmail = document.getElementById("inputEmail") as HTMLInputElement;
-
-  const btnGuardar = document.getElementById("btnGuardar")!;
-  const btnEliminar = document.getElementById("btnEliminar")!;
-
-  // MOSTRAR/OCULTAR MENÚ
+  /* Mostrar / ocultar menú */
   configBtn.addEventListener("click", () => {
-    const mostrar = configMenu.style.display === "flex" ? "none" : "flex";
-    configMenu.style.display = mostrar;
-    infoUsuario.style.display = mostrar;
+    configMenu.style.display = configMenu.style.display === "flex" ? "none" : "flex";
   });
 
-  // BUSCAR DATOS DEL USUARIO ACTIVO
-  const emailActivo = localStorage.getItem("usuarioActivo") || sessionStorage.getItem("userEmail");
-
-
-  if (!emailActivo) {
-    alert("No hay usuario activo.");
-    window.location.href = "home.html";
-    return;
-  }
-
-  
-
-  const pacientesRaw = localStorage.getItem("pacientesDePrueba");
-  const pacientes = pacientesRaw ? JSON.parse(pacientesRaw) : [];
-  const paciente = pacientes.find((p: any) => p.email === emailActivo);
-
-  if (!paciente) {
-    alert("No se encontraron los datos del usuario.");
-    return;
-  }
-
-  // MOSTRAR DATOS EN INPUTS
-  inputNombre.value = paciente.nombre;
-  inputApellido.value = paciente.apellido;
-  inputTelefono.value = paciente.telefono;
-  inputEmail.value = paciente.email;
-
-  // GUARDAR CAMBIOS
-  btnGuardar.addEventListener("click", () => {
-    paciente.nombre = inputNombre.value.trim();
-    paciente.apellido = inputApellido.value.trim();
-    paciente.telefono = inputTelefono.value.trim();
-
-    const index = pacientes.findIndex((p: any) => p.email === emailActivo);
-    if (index !== -1) {
-      pacientes[index] = paciente;
-      localStorage.setItem("pacientesDePrueba", JSON.stringify(pacientes));
-      alert("Cambios guardados correctamente.");
-    }
-  });
-
-  // ELIMINAR USUARIO
-  btnEliminar.addEventListener("click", () => {
-    const confirmar = confirm("¿Seguro que querés eliminar tu cuenta?");
-    if (!confirmar) return;
-
-    const nuevosPacientes = pacientes.filter((p: any) => p.email !== emailActivo);
-    localStorage.setItem("pacientesDePrueba", JSON.stringify(nuevosPacientes));
-    localStorage.removeItem("usuarioActivo");
-    sessionStorage.clear();
-
-    alert("Cuenta eliminada. Redirigiéndote al inicio.");
-    window.location.href = "home.html";
-  });
-
-  // CERRAR CONFIG AL HACER CLIC FUERA
-  window.addEventListener("click", (e) => {
-    if (!configBtn.contains(e.target as Node) && !configMenu.contains(e.target as Node)) {
+  /* Ocultar si clickeás afuera */
+  document.addEventListener("click", e => {
+    const target = e.target as HTMLElement;
+    if (!configMenu.contains(target) && !configBtn.contains(target)) {
       configMenu.style.display = "none";
-      infoUsuario.style.display = "none";
     }
   });
+
+  /* Eliminar usuario */
+  btnEliminar.addEventListener("click", () => {
+    if (!confirm("¿Realmente querés eliminar tu usuario? Esta acción es irreversible.")) return;
+
+    /* Busco al paciente activo */
+    const activo   = localStorage.getItem("pacienteActivo");
+    const pacientesJSON = localStorage.getItem("pacientesDePrueba");
+    if (!activo || !pacientesJSON) { volverAlLogin(); return; }
+
+    const { email } = JSON.parse(activo);
+    const pacientes = JSON.parse(pacientesJSON) as any[];
+
+    /* Borro del array y actualizo storage */
+    const restantes = pacientes.filter(p => p.email !== email);
+    localStorage.setItem("pacientesDePrueba", JSON.stringify(restantes));
+
+    /* Borro la sesión */
+    localStorage.removeItem("pacienteActivo");
+
+    alert("Tu usuario fue eliminado correctamente.");
+    volverAlLogin();
+  });
+
+  function volverAlLogin() {
+    window.location.href = "../Login/login.html";
+  }
+});
+const btnBuscar = document.getElementById("btnBuscar") as HTMLButtonElement;
+
+btnBuscar.addEventListener("click", () => {
+window.location.href = "simulacion/solicitarTurno.html";
+ 
 });
