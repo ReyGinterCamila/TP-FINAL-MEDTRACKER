@@ -1,46 +1,38 @@
 /* =================================================================
-   LOGIN – MedTracker
+   LOGIN 
    ================================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("loginForm");
-  const msg  = document.getElementById("mensajeError");   // usa el mismo <p> para errores
+  const mensajeError = document.getElementById("mensajeError");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const email = document.getElementById("email").value.trim();
-    const pass  = document.getElementById("password").value.trim();
+    const password = document.getElementById("password").value.trim();
 
-    /* ----- 1. Traer lista de usuarios guardados ----- */
-    const usuariosRaw = localStorage.getItem("usuariosMT");
-    const usuarios    = usuariosRaw ? JSON.parse(usuariosRaw) : [];
+    /* ----- 1. Cargar listas desde localStorage ----- */
+    const pacientes = JSON.parse(localStorage.getItem("pacientesDePrueba")) || [];
+    const especialistas = JSON.parse(localStorage.getItem("especialistasDePrueba")) || [];
 
     /* ----- 2. Buscar coincidencia ----- */
-    let user = usuarios.find(u => u.email === email && u.password === pass);
+    const pacienteEncontrado = pacientes.find(p => p.email === email && p.contraseña === password);
+    const especialistaEncontrado = especialistas.find(e => e.email === email && e.contraseña === password);
 
-    /* ----- 3. Fallback “admin” hard‑codeado (opcional) ----- */
-    if (!user && email === "admin@gmail.com" && pass === "Admin123") {
-      user = { rol: "medico" };  // o “admin” si tienes dashboard aparte
+    /* ----- 3. Validar login ----- */
+    if (pacienteEncontrado) {
+      localStorage.setItem("pacienteActivo", JSON.stringify({ tipo: "paciente", email }));
+      alert("✅ Inicio de sesión exitoso como paciente");
+      window.location.href = "../menuPaciente/menuPaciente.html";
+    } else if (especialistaEncontrado) {
+      localStorage.setItem("especialistasActivo", JSON.stringify({ tipo: "especialista", email }));
+      alert("✅ Inicio de sesión exitoso como especialista");
+      window.location.href = "../menuEspecialista/menuEspecialista.html";
+    } else {
+      mensajeError.textContent = "Credenciales incorrectas.";
+      mensajeError.classList.remove("mensajeError");
+      mensajeError.classList.add("mostrarMensajeError");
     }
-
-    /* ----- 4. Validar ----- */
-    if (!user) {
-      msg.textContent = "Credenciales incorrectas.";
-      msg.classList.remove("mensajeError");
-      msg.classList.add("mostrarMensajeError");
-      return;
-    }
-
-    /* ----- 5. Login exitoso: guardar rol, email y redirigir ----- */
-sessionStorage.setItem("userRole", user.rol);
-sessionStorage.setItem("userEmail", email);
-
-if (user.rol === "medico") {
-  window.location.href = "../homeEspecialista.html";
-} else {
-  window.location.href = "../homePaciente.html";
-}
-
   });
 });

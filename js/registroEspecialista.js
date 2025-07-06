@@ -15,51 +15,68 @@ document.addEventListener("DOMContentLoaded", () => {
     const telefono = document.getElementById("telefono").value.trim();
     const matricula = document.getElementById("matricula").value.trim();
     const especialidad = document.getElementById("especialidad").value.trim();
-    const contraseña = document.getElementById("contraseña").value.trim();
-    const contraseñaRepetida = document.getElementById("contraseñaRepetida").value.trim();
+    const contraseña = document.getElementById("contraseña").value;
+    const contraseñaRepetida = document.getElementById("contraseñaRepetida").value;
 
-    // Validaciones
+    //verificar que todos los campos esten completos
     if (!nombre || !apellido || !fechaNacimiento || !tipoDocumento || !numeroDocumento || !domicilio || !email || !telefono || !matricula || !especialidad || !contraseña || !contraseñaRepetida) {
       mostrarError("Asegúrese de completar todos los campos correctamente.");
       return;
     }
 
+    //verificar que las contraseñas coincidan
     if (contraseña !== contraseñaRepetida) {
       mostrarError("Las contraseñas no coinciden.");
       return;
     }
 
+    //verificar que la contraseña cumpla con los requisitos
     if (!validarContraseña(contraseña)) {
       mostrarError("La contraseña debe tener al menos 7 caracteres, una mayúscula y un número.");
       return;
     }
 
-    // Obtener usuarios guardados
-    const usuariosRaw = localStorage.getItem("usuariosMT");
-    const usuarios = usuariosRaw ? JSON.parse(usuariosRaw) : [];
+    //traer array pacientes o crear uno vacio
+    const pacientesGuardados = JSON.parse(localStorage.getItem("pacientesDePrueba")) || [];
+    const especialistasGuardados = JSON.parse(localStorage.getItem("especialistasDePrueba")) || [];
 
-    // Evitar email duplicado
-    if (usuarios.some(u => u.email === email)) {
-      mostrarError("Ese correo ya está registrado.");
+    //validar que no exista paciente con el mismo email o documento
+    const existePaciente = pacientesGuardados.some(p =>
+      p.email.toLowerCase() === email.toLowerCase() || p.numeroDocumento === numeroDocumento
+    );
+
+    const existeEspecialista = especialistasGuardados.some(e =>
+      e.email.toLowerCase() === email.toLowerCase() || e.numeroDocumento === numeroDocumento
+    );
+
+    if (existeEspecialista || existePaciente) {
+      mostrarError("Ya existe un usuario con ese email o documento.");
       return;
     }
 
-    // Agregar el especialista
-    usuarios.push({ email, password: contraseña, rol: "medico" });
-    localStorage.setItem("usuariosMT", JSON.stringify(usuarios));
+    //crear nuevo especialista
+    const nuevoEspecialista = {
+      nombre,
+      apellido,
+      fechaNacimiento,
+      tipoDocumento,
+      numeroDocumento,
+      domicilio,
+      email,
+      telefono,
+      matricula,
+      especialidad,
+      contraseña
+    };
 
-    // Guardar datos clínicos en otra lista
-    const medicosRaw = localStorage.getItem("medicosDePrueba");
-    const medicos = medicosRaw ? JSON.parse(medicosRaw) : [];
-    medicos.push({ nombre, apellido, matricula, especialidad, email, telefono, domicilio });
-    localStorage.setItem("medicosDePrueba", JSON.stringify(medicos));
+    //guardar nuevo especialista en localStorage
+    especialistasGuardados.push(nuevoEspecialista);
+    localStorage.setItem("especialistasDePrueba", JSON.stringify(especialistasGuardados));
 
-    // Login automático
-    sessionStorage.setItem("userRole", "medico");
-
-    alert("Registro exitoso! Redirigiendo al panel...");
+    alert("✔ Registro exitoso.");
     form.reset();
-    window.location.href = "../pages/homeEspecialista.html";
+
+    window.location.href = "../../Login/login.html";
   });
 
   function mostrarError(mensaje) {
@@ -68,18 +85,11 @@ document.addEventListener("DOMContentLoaded", () => {
     mensajeError.classList.add("mostrarMensajeError");
   }
 
-  function validarContraseña(contraseña) {
-    if (contraseña.length < 7) return false;
-    let tieneMayuscula = false;
-    let tieneNumero = false;
-    for (let i = 0; i < contraseña.length; i++) {
-      const char = contraseña[i];
-      if (!isNaN(char)) {
-        tieneNumero = true;
-      } else if (char === char.toUpperCase() && char.match(/[A-Z]/)) {
-        tieneMayuscula = true;
-      }
-    }
+  function validarContraseña(pass) {
+    if (pass.length < 7) return false;
+    const tieneMayuscula = /[A-Z]/.test(pass);
+    const tieneNumero = /\d/.test(pass);
     return tieneMayuscula && tieneNumero;
   }
 });
+

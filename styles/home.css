@@ -473,8 +473,8 @@ body.verHC .contenedorPrincipalVerHC {
 }
 
 .contenedorPrincipalVerHC {
-  flex: 1;                /* ocupa el espacio disponible */
-  margin-block: 2rem;     /* 2 rem arriba y abajo */
+  flex: 1;             
+  margin-block: 2rem;     
   padding-inline: 2rem;
 }
 
@@ -738,7 +738,7 @@ body.transferencias main.centrado {
   background: #fff;
   border-radius: 1rem;
   box-shadow: 0 6px 18px rgba(0,0,0,.08);
-  padding: 3rem 3.5rem;   /* MÁS relleno interno */
+  padding: 3rem 3.5rem;   
   row-gap: 2rem;  
 }
 
@@ -762,36 +762,33 @@ body.transferencias main.centrado {
   resize: vertical;
 }
 
-/* filtro separado de la tabla */
 .filtroTransferencias {
   width: 100%;
 }
 .filtroTransferencias input {
-  margin-bottom: 1rem;    /* aire bajo la búsqueda */
+  margin-bottom: 1rem;  
 }
 
-/* tabla con aire entre filas y columnas */
 .tablaTransferencias {
-  margin-top: 0.5rem;     /* pequeñísimo extra por seguridad */
-  border-collapse: separate;   /* permite espacio interno */
-  border-spacing: 0 0.5rem;    /* 0 cols · 0.5 rem filas */
+  margin-top: 0.5rem;     
+  border-collapse: separate;   
+  border-spacing: 0 0.5rem;    
 }
 
 .tablaTransferencias th,
 .tablaTransferencias td {
-  padding: 0.9rem 1.25rem;        /* celdas más espaciosas */
+  padding: 0.9rem 1.25rem;       
 }
 
 .tablaTransferencias tbody tr {
-  background: #f9fbff;            /* franja suave para filas */
-  border-radius: 6px;             /* “pastilla” visual */
+  background: #f9fbff;           
+  border-radius: 6px;        
 }
 
 .tablaTransferencias tbody tr:hover {
-  background: #eef5ff;            /* resaltado al pasar el mouse */
+  background: #eef5ff;           
 }
 
-/* botón alineado centrado en su celda */
 .tablaTransferencias td:last-child {
   text-align: center;
 }

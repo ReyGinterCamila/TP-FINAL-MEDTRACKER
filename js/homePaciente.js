@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", function () {
     var configBtn = document.getElementById("btn-config");
     var configMenu = document.getElementById("config-menu");
     var btnEliminar = document.getElementById("btnEliminar");
+    
     /* Mostrar / ocultar menú */
     configBtn.addEventListener("click", function () {
         configMenu.style.display = configMenu.style.display === "flex" ? "none" : "flex";
@@ -35,7 +36,7 @@ window.addEventListener("DOMContentLoaded", function () {
         volverAlLogin();
     });
     function volverAlLogin() {
-        window.location.href = "../Login/login.html";
+        window.location.href = "home.html";
     }
 });
 var btnBuscar = document.getElementById("btnBuscar");

@@ -35,49 +35,55 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     
-   /* --- REGISTRO EN localStorage.usuariosMT --- */
-    const usuariosRaw = localStorage.getItem("usuariosMT");
-    const usuarios    = usuariosRaw ? JSON.parse(usuariosRaw) : [];
+  //traer array pacientes o crear uno vacio
+    const pacientesGuardados = JSON.parse(localStorage.getItem("pacientesDePrueba")) || [];
+    const especialistasGuardados = JSON.parse(localStorage.getItem("especialistasDePrueba")) || [];
 
-    // Evitar email duplicado
-    if (usuarios.some(u => u.email === email)) {
-      mostrarError("Ese correo ya está registrado.");
+    //validar que no exista paciente con el mismo email o documento
+    const existePaciente = pacientesGuardados.some(p =>
+      p.email.toLowerCase() === email.toLowerCase() || p.numeroDocumento === numeroDocumento
+    );
+
+    const existeEspecialista = especialistasGuardados.some(e =>
+      e.email.toLowerCase() === email.toLowerCase() || e.numeroDocumento === numeroDocumento
+    );
+
+    if (existeEspecialista || existePaciente) {
+      mostrarError("Ya existe un usuario con ese email o documento.");
       return;
     }
 
-    // Guardar nuevo usuario con su rol
-    usuarios.push({ email, password: contraseña, rol: "paciente" });
-    localStorage.setItem("usuariosMT", JSON.stringify(usuarios));
+    const nuevoPaciente = {
+      nombre,
+      apellido,
+      fechaNacimiento,
+      tipoDocumento,
+      numeroDocumento,
+      domicilio,
+      email,
+      telefono,
+      contraseña
+    };
 
-    /* --- EXTRA opcional: guardar datos clínicos en otra lista --- */
-    const pacientesRaw = localStorage.getItem("pacientesDePrueba");
-    const pacientes    = pacientesRaw ? JSON.parse(pacientesRaw) : [];
-    pacientes.push({ nombre, apellido, numeroDocumento, fechaNacimiento, email, telefono, domicilio });
-    localStorage.setItem("pacientesDePrueba", JSON.stringify(pacientes));
+    pacientesGuardados.push(nuevoPaciente);
+    localStorage.setItem("pacientesDePrueba", JSON.stringify(pacientesGuardados));
 
-    /* --- LOGIN AUTOMÁTICO --- */
-sessionStorage.setItem("userRole", "paciente");
-sessionStorage.setItem("userEmail", email);
-
-
-    alert("¡Registro exitoso! Redirigiéndote a tu panel…");
-    window.location.href = "../pages/homePaciente.html";
+    alert("✔ Registro exitoso.");
+    form.reset();
+    //nos movemos al login
+    window.location.href = "../pages/login.html";
   });
 
-  function mostrarError(mensaje){
+  function mostrarError(mensaje) {
     mensajeError.textContent = mensaje;
     mensajeError.classList.remove("mensajeError");
     mensajeError.classList.add("mostrarMensajeError");
   }
 
-  function validarContraseña(pass){
+  function validarContraseña(pass) {
     if (pass.length < 7) return false;
-    let mayusc = false, num = false;
-    for (const c of pass){
-      if (!isNaN(c)) num = true;
-      else if (/[A-Z]/.test(c) && c === c.toUpperCase()) mayusc = true;
-    }
-    return mayusc && num;
+    const tieneMayuscula = /[A-Z]/.test(pass);
+    const tieneNumero = /\d/.test(pass);
+    return tieneMayuscula && tieneNumero;
   }
 });
-
