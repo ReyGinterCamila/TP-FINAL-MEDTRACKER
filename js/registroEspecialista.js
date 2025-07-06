@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("✔ Registro exitoso.");
     form.reset();
 
-    window.location.href = "../../Login/login.html";
+    window.location.href = "../pages/homeEspecialista.html";
   });
 
   function mostrarError(mensaje) {

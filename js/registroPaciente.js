@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alert("✔ Registro exitoso.");
     form.reset();
     //nos movemos al login
-    window.location.href = "../pages/login.html";
+    window.location.href = "../pages/homePaciente.html";
   });
 
   function mostrarError(mensaje) {
