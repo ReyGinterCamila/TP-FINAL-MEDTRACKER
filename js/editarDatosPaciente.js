@@ -1,13 +1,12 @@
 /* =========================================================
    EDITAR PERFIL PACIENTE – MedTracker
-   (compila a editarDatosPaciente.js)
    ========================================================= */
 document.addEventListener("DOMContentLoaded", function () {
     /* 1. ¿Quién está logueado? --------------------------------- */
     var emailActivo = sessionStorage.getItem("userEmail");
     if (!emailActivo) {
         alert("No hay sesión activa."); // <- no debería ocurrir
-        return (window.location.href = "../Login/login.html");
+        return (window.location.href = "../pages/login.html");
     }
     /* 2. Traer la lista de pacientes --------------------------- */
     var pacientes = JSON.parse(localStorage.getItem("pacientesDePrueba") || "[]");
